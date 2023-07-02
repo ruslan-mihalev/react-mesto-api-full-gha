@@ -1,8 +1,8 @@
 {
-  "name": "express-mesto-gha",
+  "name": "react-mesto-api-full-gha/backend",
   "version": "1.0.0",
   "main": "app.js",
-  "repository": "https://github.com/ruslan-mihalev/express-mesto-gha.git",
+  "repository": "https://github.com/ruslan-mihalev/react-mesto-api-full-gha",
   "author": "Ruslan Mikhalev <ruslan.mikhalev.rus@yandex.ru>",
   "license": "MIT",
   "scripts": {

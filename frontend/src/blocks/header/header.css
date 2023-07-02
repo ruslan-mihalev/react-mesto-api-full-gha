@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  width: 100%;
+  min-width: var(--min-screen-width);
+  max-width: min(calc(100vw - var(--min-header-content-horizontal-padding-2)), var(--max-content-width));
+  min-height: 84px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 468px) {
+  .header {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  .header {
+    min-height: 118px;
+  }
+}

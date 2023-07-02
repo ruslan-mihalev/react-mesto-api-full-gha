@@ -1,0 +1,12 @@
+.card-grid__item-like-count {
+  display: none;
+  margin: 3px 0 0;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+}

@@ -1,0 +1,17 @@
+.footer {
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: calc(var(--min-content-width));
+  max-width: min(calc(100vw - var(--min-content-horizontal-padding-2)), var(--max-content-width));
+  min-height: 62px;
+  margin: 0 auto;
+  padding: 12px 0 0 0;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 880px) {
+  .footer {
+    min-height: 108px;
+    padding-top: 32px;
+  }
+}

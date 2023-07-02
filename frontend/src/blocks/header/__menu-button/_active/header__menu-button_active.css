@@ -1,0 +1,5 @@
+.header__menu-button_active {
+  width: 20px;
+  height: 20px;
+  background: url('../../../../images/icon-close.svg') no-repeat center / cover;
+}

@@ -1,0 +1,13 @@
+.card-grid__item-like-button {
+  display: block;
+  width: 22px;
+  height: 19px;
+  background: url(../../../images/favorite-outline.svg) no-repeat center / cover;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.card-grid__item-like-button:hover {
+  opacity: 0.5;
+}

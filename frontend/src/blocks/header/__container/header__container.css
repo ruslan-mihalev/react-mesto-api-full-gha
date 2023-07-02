@@ -1,0 +1,9 @@
+.header__container {
+  flex: 1 0 auto;
+  min-height: 84px;
+  margin-left: min(max(calc(var(--min-header-content-horizontal-padding) - (100vw - var(--min-screen-width)) / 2), 0px), var(--min-header-content-horizontal-padding));
+  margin-right: min(max(calc(var(--min-header-content-horizontal-padding) - (100vw - var(--min-screen-width)) / 2), 0px), var(--min-header-content-horizontal-padding));
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

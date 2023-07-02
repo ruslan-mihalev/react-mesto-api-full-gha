@@ -1,0 +1,23 @@
+.profile__person-about {
+  display: block;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 880px) {
+  .profile__person-about {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

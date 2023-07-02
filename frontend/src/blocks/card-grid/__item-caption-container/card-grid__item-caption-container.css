@@ -1,0 +1,10 @@
+.card-grid__item-caption-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 79px;
+  margin: 0 auto;
+  padding: 0 21px;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}

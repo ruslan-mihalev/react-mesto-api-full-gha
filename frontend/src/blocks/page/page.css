@@ -1,0 +1,24 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background-color: #000;
+  font-family: 'Inter', Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  --min-screen-width: 320px;
+  --min-header-content-horizontal-padding: 30px;
+  --min-header-content-horizontal-padding-2: 54px;
+  --min-content-horizontal-padding: 19px;
+  --min-content-horizontal-padding-2: 38px;
+  --min-content-width: calc(var(--min-screen-width) - var(--min-content-horizontal-padding-2));
+  --max-content-width: 880px;
+}

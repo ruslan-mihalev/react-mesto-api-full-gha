@@ -1,0 +1,6 @@
+.card-grid__item-like-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 0 auto;
+}

@@ -1,0 +1,22 @@
+.header__nav-link {
+  display: block;
+  padding: 0;
+  color: #fff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 468px) {
+  .header__nav-link {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.header__nav-link:hover {
+  opacity: 0.6;
+}

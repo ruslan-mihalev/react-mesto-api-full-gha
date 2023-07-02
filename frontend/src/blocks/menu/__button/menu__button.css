@@ -1,0 +1,18 @@
+.menu__button {
+  display: block;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+  color: #A9A9A9;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+}
+
+.menu__button:hover {
+  opacity: 0.6;
+}

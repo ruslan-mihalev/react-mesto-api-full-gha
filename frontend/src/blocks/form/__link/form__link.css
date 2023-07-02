@@ -1,0 +1,25 @@
+.form__link {
+  display: block;
+  width: 100%;
+  padding: 0;
+  color: #fff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.form__link:hover {
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 468px) {
+  .form__link {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

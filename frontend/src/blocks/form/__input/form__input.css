@@ -1,0 +1,17 @@
+.form__input {
+  display: block;
+  width: 100%;
+  margin: 0 0 1px;
+  padding: 1px 0 8px;
+  box-sizing: border-box;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  outline: none;
+}

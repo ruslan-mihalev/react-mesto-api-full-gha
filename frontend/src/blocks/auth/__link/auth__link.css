@@ -1,0 +1,9 @@
+.auth__link {
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 468px) {
+  .auth__link {
+    margin-top: 15px;
+  }
+}

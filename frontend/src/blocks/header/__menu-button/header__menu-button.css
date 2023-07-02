@@ -1,0 +1,21 @@
+.header__menu-button {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  padding: 0;
+  background: url('../../../images/icon-menu.svg') no-repeat center / cover;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 468px) {
+  .header__menu-button {
+    display: none;
+  }
+}
+
+.header__menu-button:hover {
+  opacity: 0.6;
+}

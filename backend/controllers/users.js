@@ -12,6 +12,8 @@ const {
   USER_WITH_EMAIL_ALREADY_EXISTS,
 } = require('../utils/errorMessages');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const MILLISECONDS_IN_WEEK = 7 * 24 * 60 * 60 * 1000;
 
 module.exports.getUsers = (req, res, next) => {
@@ -52,7 +54,7 @@ module.exports.login = (req, res, next) => {
 
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       res
         .cookie('jwt', token, { maxAge: MILLISECONDS_IN_WEEK, httpOnly: true })
         .send({ email })

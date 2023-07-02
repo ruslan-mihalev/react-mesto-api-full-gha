@@ -16,6 +16,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 
 const app = express();
 app.use(express.json());
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.post('/signup', POST_SIGNUP, createUser);
 app.post('/signin', POST_SIGNIN, login);
 app.use(cookieParser());

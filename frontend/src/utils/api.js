@@ -1,3 +1,5 @@
+import { BASE_API_URL } from './hosts';
+
 class Api {
   constructor({baseUrl, headers}) {
     this.baseUrl = baseUrl;
@@ -65,7 +67,7 @@ class Api {
 
 const cohortId = 'cohort-62';
 const token = '66420b20-5df2-413b-bc85-90b83b50056d';
-const baseUrl = `https://mesto.nomoreparties.co/v1/${cohortId}`;
+const baseUrl = `${BASE_API_URL}/${cohortId}`;
 const headers = {
   'authorization': token, 'Content-Type': 'application/json'
 };

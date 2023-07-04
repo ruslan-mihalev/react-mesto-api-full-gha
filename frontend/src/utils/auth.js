@@ -1,4 +1,4 @@
-const BASE_AUTH_URL = 'https://auth.nomoreparties.co';
+import { BASE_AUTH_URL } from './hosts';
 
 export const register = (email, password) => {
   return fetch(`${BASE_AUTH_URL}/signup`, {

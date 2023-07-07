@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const cors = require('cors');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const express = require('express');
@@ -16,9 +16,17 @@ const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 const app = express();
+
+const corsOptions = {
+  origin: [/^http:\/\/localhost:\d+$/, /^https?:\/\/travelplaces.api.nomoreparties.sbs$/],
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use(requestLogger);
+
+app.options('*', cors());
 
 app.get('/crash-test', () => {
   setTimeout(() => {

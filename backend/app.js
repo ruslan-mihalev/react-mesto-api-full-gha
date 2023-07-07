@@ -18,7 +18,12 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 const app = express();
 
 const corsOptions = {
-  origin: [/^http:\/\/localhost:\d+$/, /^https?:\/\/travelplaces.api.nomoreparties.sbs$/],
+  origin: [
+    /^http:\/\/localhost:\d+$/,
+    /^http:\/\/127.0.0.1:\d+$/,
+    /^https?:\/\/travelplaces.api.nomoreparties.sbs$/
+  ],
+  credentials: true,
 };
 app.use(cors(corsOptions));
 

@@ -35,7 +35,7 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // Credentials validation
+  // Проверка credentials
   useEffect(() => {
     const email = localStorage.getItem('email');
     if (email) {
@@ -47,14 +47,15 @@ function App() {
         })
         .catch(err => {
           if (err)
-            console.log(`Ошибка проверки cookie: ${err}`);
+            console.log(`Ошибка проверки полномочий доступа: ${err}`);
         })
     }
   }, []);
 
   useEffect(() => {
     if (localEmail) {
-      // Avoiding /user/me request duplication
+
+      // Проверка для избегания повторного запроса информации о текущем пользователе "/user/me"
       if (!currentUser) {
         api.getUser()
           .then((user) => {

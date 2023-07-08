@@ -69,6 +69,13 @@ module.exports.login = (req, res, next) => {
     });
 };
 
+module.exports.logout = (req, res, next) => {
+  res
+    .clearCookie('jwt')
+    .send({})
+    .end();
+};
+
 module.exports.createUser = (req, res, next) => {
   const {
     email, password, name, about, avatar,

@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const auth = require('./middlewares/auth');
 const { errorsHandler } = require('./middlewares/errors');
 const router = require('./routes');
-const { createUser, login } = require('./controllers/users');
+const { createUser, login, logout } = require('./controllers/users');
 const { POST_SIGNUP, POST_SIGNIN } = require('./utils/validators');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -40,6 +40,7 @@ app.get('/crash-test', () => {
 });
 app.post('/signup', POST_SIGNUP, createUser);
 app.post('/signin', POST_SIGNIN, login);
+app.get('/signout', logout);
 app.use(cookieParser());
 app.use(auth);
 app.use(router);

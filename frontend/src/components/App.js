@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react';
-import {Route, Routes, Navigate, useNavigate} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from "./ImagePopup";
-import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from '../utils/api';
 import * as auth from '../utils/auth';
 import EditProfilePopup from "./EditProfilePopup";
@@ -20,7 +20,7 @@ function App() {
 
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
+  const [localEmail, setLocalEmail] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState([]);
 
@@ -35,35 +35,93 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  // Credentials validation
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
-      auth.validateToken(token)
-        .then(body => {
-          const email = body.data.email;
-          if (email) {
-            setEmail(email);
-            navigate('/', {replace: true});
-          }
+    const email = localStorage.getItem('email');
+    if (email) {
+      api.getUser()
+        .then((user) => {
+          setCurrentUser(user);
+          setLocalEmail(email);
+          navigate('/', { replace: true })
         })
         .catch(err => {
-          console.log(`Ошибка проверки токена: ${err}`);
+          if (err)
+            console.log(`Ошибка проверки cookie: ${err}`);
         })
     }
-  }, [navigate]);
+  }, []);
 
   useEffect(() => {
-    if (email) {
-      Promise.all([api.getUser(), api.getCards()])
-        .then(([user, initialCards]) => {
-          setCurrentUser(user);
+    if (localEmail) {
+      // Avoiding /user/me request duplication
+      if (!currentUser) {
+        api.getUser()
+          .then((user) => {
+            setCurrentUser(user);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      }
+
+      api.getCards()
+        .then((initialCards) => {
           setCards(initialCards);
         })
         .catch(err => {
           console.log(err);
         })
     }
-  }, [email]);
+  }, [localEmail]);
+
+  function handleRegister(email, password) {
+    auth.register(email, password)
+      .then(body => {
+        navigate("/sign-in", {replace: true});
+        // Покажем попап с подздравлением
+        setIsInfoTooltipPopupStyleSuccess(true);
+        setInfoTooltipPopupMessage('Вы успешно \nзарегистрировались!');
+        setIsInfoTooltipPopupOpen(true);
+      })
+      .catch(err => {
+        console.log(`Ошибка регистрации: ${err}`);
+        // Покажем попап с ошибкой
+        setIsInfoTooltipPopupStyleSuccess(false);
+        setInfoTooltipPopupMessage('Что-то пошло не так! \nПопробуйте ещё раз.');
+        setIsInfoTooltipPopupOpen(true);
+      });
+  }
+
+  function handleLogin(email, password) {
+    auth.authorize(email, password)
+      .then(body => {
+        localStorage.setItem('email', body.email)
+        setCurrentUser(null);
+        setLocalEmail(body.email);
+        navigate("/", {replace: true});
+      })
+      .catch(err => {
+        console.log(`Ошибка авторизации: ${err}`);
+        // Покажем попап с ошибкой
+        setIsInfoTooltipPopupStyleSuccess(false);
+        setInfoTooltipPopupMessage('Что-то пошло не так! \nПопробуйте ещё раз.');
+        setIsInfoTooltipPopupOpen(true);
+      });
+  }
+
+  function handleSignOut() {
+    auth.signout()
+      .then(body => {
+        localStorage.removeItem('email');
+        setCurrentUser(null)
+        setLocalEmail('');
+        navigate("/sign-in", {replace: true});
+      })
+      .catch(err => {
+        console.log(`Ошибка log out: ${err}`);
+      });
+  }
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -155,55 +213,15 @@ function App() {
       });
   }
 
-  function handleRegister(email, password) {
-    auth.register(email, password)
-      .then(body => {
-        navigate("/sign-in", {replace: true});
-        // Покажем попап с подздравлением
-        setIsInfoTooltipPopupStyleSuccess(true);
-        setInfoTooltipPopupMessage('Вы успешно \nзарегистрировались!');
-        setIsInfoTooltipPopupOpen(true);
-      })
-      .catch(err => {
-        console.log(`Ошибка регистрации: ${err}`);
-        // Покажем попап с ошибкой
-        setIsInfoTooltipPopupStyleSuccess(false);
-        setInfoTooltipPopupMessage('Что-то пошло не так! \nПопробуйте ещё раз.');
-        setIsInfoTooltipPopupOpen(true);
-      });
-  }
-
-  function handleLogin(email, password) {
-    auth.authorize(email, password)
-      .then(body => {
-        localStorage.setItem('token', body.token);
-        setEmail(email);
-        navigate("/", {replace: true});
-      })
-      .catch(err => {
-        console.log(`Ошибка авторизации: ${err}`);
-        // Покажем попап с ошибкой
-        setIsInfoTooltipPopupStyleSuccess(false);
-        setInfoTooltipPopupMessage('Что-то пошло не так! \nПопробуйте ещё раз.');
-        setIsInfoTooltipPopupOpen(true);
-      });
-  }
-
-  function handleSignOut() {
-    localStorage.removeItem('token');
-    setEmail('');
-    navigate("/sign-in", {replace: true});
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header email={email} onSignOut={handleSignOut}/>
+        <Header email={localEmail} onSignOut={handleSignOut}/>
         <Routes>
           <Route path="/" element={
             <>
               <ProtectedRouter element={Main}
-                               isLoggedIn={!!email}
+                               isLoggedIn={!!localEmail}
                                onEditAvatar={handleEditAvatarClick}
                                onEditProfile={handleEditProfileClick}
                                onAddPlace={handleAddPlaceClick}
@@ -220,7 +238,7 @@ function App() {
           <Route path="/sign-in" element={
             <Login onLogin={handleLogin} />
           }/>
-          <Route path="*" element={!!email ? <Navigate to="/" replace/> : <Navigate to="/sign-in" replace/>}/>
+          <Route path="*" element={!!localEmail ? <Navigate to="/" replace/> : <Navigate to="/sign-in" replace/>}/>
         </Routes>
 
         <EditProfilePopup

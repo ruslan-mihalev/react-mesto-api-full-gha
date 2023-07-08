@@ -18,7 +18,8 @@ class Api {
   _doRequest(method, url, body) {
     const options = {
       method: method,
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include',
     }
     if (body) {
       options.body = JSON.stringify(body);
@@ -65,12 +66,8 @@ class Api {
   }
 }
 
-const cohortId = 'cohort-62';
-const token = '66420b20-5df2-413b-bc85-90b83b50056d';
-const baseUrl = `${BASE_API_URL}/${cohortId}`;
-const headers = {
-  'authorization': token, 'Content-Type': 'application/json'
-};
+const baseUrl = `${BASE_API_URL}`;
+const headers = { 'Content-Type': 'application/json' };
 const api = new Api({baseUrl, headers});
 
 export default api;

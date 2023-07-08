@@ -22,6 +22,7 @@ export const authorize = (email, password) => {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify({email, password})
   })
     .then(response => {
@@ -32,13 +33,10 @@ export const authorize = (email, password) => {
     });
 };
 
-export const validateToken = (token) => {
-  return fetch(`${BASE_AUTH_URL}/users/me`, {
+export const signout = () => {
+  return fetch(`${BASE_AUTH_URL}/signout`, {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
+    credentials: 'include',
   })
     .then(response => {
       if (response.ok) {
@@ -46,4 +44,4 @@ export const validateToken = (token) => {
       }
       return Promise.reject(response);
     });
-}
+};

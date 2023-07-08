@@ -56,7 +56,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       res
-        .cookie('jwt', token, { maxAge: MILLISECONDS_IN_WEEK, httpOnly: true })
+        .cookie('jwt', token, { maxAge: MILLISECONDS_IN_WEEK, httpOnly: true, domain: 'api.travelplaces.api.nomoreparties.sbs' })
         .send({ email })
         .end();
     })

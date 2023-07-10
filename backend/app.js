@@ -19,8 +19,6 @@ const app = express();
 
 const corsOptions = {
   origin: [
-    /^http:\/\/localhost:\d+$/,
-    /^http:\/\/127.0.0.1:\d+$/,
     /^https?:\/\/travelplaces.api.nomoreparties.sbs$/,
   ],
   credentials: true,

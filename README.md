@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.97.42
+IP-адрес 051.250.097.042
 
 Frontend https://travelplaces.api.nomoreparties.sbs
 
